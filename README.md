@@ -30,42 +30,43 @@ O sistema será uma plataforma web que conectará calouros a projetos acadêmico
 * Fora do escopo O sistema não incluirá funcionalidades como chat interno, gerenciamento completo de tarefas dentro dos projetos ou qualquer tipo de intermediação financeira. Seu foco será exclusivamente conectar calouros e veteranos de maneira simples e eficiente.
 
 ## Backlogs do Produto
-**Requisitos:**
+**Requisitos - Plataforma Web:**
 
-* Web;
-* ⁠Opção de publicar novos projetos;
-* ⁠Períodos definidos para novas publicações e inscrições;
-* ⁠Definir máximo e mínimo de calouros permitidos por projeto.
+Funcionalidade para criação e publicação de novos projetos, com interface intuitiva e fácil navegação.
+
+Definição de períodos específicos para a abertura de novas publicações e inscrições, com controle de datas para maior organização.
+
+Capacidade de configurar o número mínimo e máximo de calouros permitidos por projeto, garantindo flexibilidade no gerenciamento de participantes.
 
 ## Cronograma
 O desenvolvimento do projeto Conecta foi organizado em sprints semanais, seguindo a metodologia ágil Scrum. Abaixo, apresentamos o cronograma detalhado das atividades realizadas em cada sprint:
 
-Sprint 1: Levantamento de Requisitos e Planejamento (08/03/2025 – 17/03/2025)
-	•	Definição dos objetivos do projeto.
-	•	Levantamento dos requisitos funcionais e não funcionais.
-	•	Criação do backlog inicial no Jira.
-	•	Planejamento das funcionalidades a serem desenvolvidas nas próximas sprints.
+### Sprint 1: Levantamento de Requisitos e Planejamento (08/03/2025 – 17/03/2025)
+- Definição dos objetivos do projeto.
+- Levantamento dos requisitos funcionais e não funcionais.
+- Criação do backlog inicial no Jira.
+- Planejamento das funcionalidades a serem desenvolvidas nas próximas sprints.
 
-Sprint 2: Configuração do Ambiente e Estrutura Inicial (19/03/2025 – 08/04/2025)
-	•	Configuração do ambiente de desenvolvimento.
-	•	Estruturação inicial do projeto Flutter.
-	•	Configuração do backend em Python com Flask.
-	•	Integração inicial com o banco de dados PostgreSQL.
+### Sprint 2: Configuração do Ambiente e Estrutura Inicial (19/03/2025 – 08/04/2025)
+- Configuração do ambiente de desenvolvimento.
+- Estruturação inicial do projeto Flutter.
+- Configuração do backend em Python com Flask.
+- Integração inicial com o banco de dados PostgreSQL.
 
-Sprint 3: Desenvolvimento das Funcionalidades Básicas (09/04/2025 – 22/04/2025)
-	•	Implementação do sistema de cadastro e autenticação de usuários.
-	•	Desenvolvimento da interface de login e registro no Flutter.
-	•	Criação das rotas de API para autenticação.
+### Sprint 3: Desenvolvimento das Funcionalidades Básicas (09/04/2025 – 22/04/2025)
+- Implementação do sistema de cadastro e autenticação de usuários.
+- Desenvolvimento da interface de login e registro no Flutter.
+- Criação das rotas de API para autenticação.
 
-Sprint 4: Catálogo de Projetos e Inscrições (23/04/2025 – 14/05/2025)
-	•	Desenvolvimento do catálogo de projetos disponíveis.
-	•	Implementação da funcionalidade de inscrição em projetos.
-	•	Criação de filtros para busca de projetos por área de interesse.
+### Sprint 4: Catálogo de Projetos e Inscrições (23/04/2025 – 14/05/2025)
+- Desenvolvimento do catálogo de projetos disponíveis.
+- Implementação da funcionalidade de inscrição em projetos.
+- Criação de filtros para busca de projetos por área de interesse.
 
-Sprint 5: Gerenciamento de Participações e Validações (21/05/2025 – 04/06/2025)
-	•	Implementação do painel para veteranos gerenciarem inscrições.
-	•	Validação de dados e regras de negócio (número mínimo e máximo de calouros por projeto).
-	•	Testes de usabilidade e correções de bugs identificados.
+### Sprint 5: Gerenciamento de Participações e Validações (21/05/2025 – 04/06/2025)
+- Implementação do painel para veteranos gerenciarem inscrições.
+- Validação de dados e regras de negócio (número mínimo e máximo de calouros por projeto).
+- Testes de usabilidade e correções de bugs identificados.
 
 ## Materiais e Métodos
 Modelagem do sistema:
