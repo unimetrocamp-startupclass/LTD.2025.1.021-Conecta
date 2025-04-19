@@ -67,9 +67,3 @@ O desenvolvimento do projeto Conecta foi organizado em sprints semanais, seguind
 - Implementação do painel para veteranos gerenciarem inscrições.
 - Validação de dados e regras de negócio (número mínimo e máximo de calouros por projeto).
 - Testes de usabilidade e correções de bugs identificados.
-## Resultados
-Protótipo:
-
-## Conclusão
-Impacto do sistema:
-Melhorias Futuras:
