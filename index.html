@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONNECTA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f6f9;
+    }
+    header {
+      background: linear-gradient(90deg, #1e3c72, #2a5298);
+      color: white;
+      padding: 1rem 2rem;
+    }
+    header h1 {
+      font-size: 2rem;
+    }
+    .hero {
+      padding: 4rem 2rem;
+      background: linear-gradient(to bottom right, #1e3c72, #2a5298);
+      color: white;
+      text-align: center;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    .section-title {
+      text-align: center;
+      margin: 4rem 0 2rem;
+    }
+    .card-project {
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border-radius: 12px;
+    }
+    footer {
+      background: #1e3c72;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="d-flex justify-content-between align-items-center">
+    <h1>CONNECTA</h1>
+    <nav>
+      <a href="login.html" class="text-white me-3">Login</a>
+      <a href="cadastro.html" class="text-white">Cadastro</a>
+    <a href="sobre.html" class="text-white">Sobre</a>
+    <a href="perfil.html" class="text-white ms-3">Perfil</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Conectando pessoas e ideias</h2>
+    <p>A CONNECTA é a ponte entre inovação e colaboração. Junte-se a nós e descubra um novo jeito de se conectar com o mundo.</p>
+    <a href="cadastro.html" class="btn btn-light mt-4 px-4 py-2 fw-bold">Cadastre-se agora</a>
+  </section>
+
+  <section class="container">
+    <h3 class="section-title">Projetos Disponíveis</h3>
+    <div id="form-projeto-container" style="display:none;">
+      <form id="form-projeto" class="bg-white p-4 rounded mb-5" enctype="multipart/form-data">
+        <h4 class="mb-3">Postar Novo Projeto</h4>
+        <div class="mb-3">
+          <input type="text" name="titulo" class="form-control" placeholder="Título do projeto" required>
+        </div>
+        <div class="mb-3">
+          <textarea name="descricao" class="form-control" placeholder="Descrição do projeto" required></textarea>
+        </div>
+        <div class="mb-3">
+          <input type="number" name="limite" class="form-control" placeholder="Limite de calouros" min="1" required>
+        </div>
+        <div class="mb-3">
+          <input type="file" name="arquivo" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Publicar Projeto</button>
+      </form>
+    </div>
+    <div id="lista-projetos" class="row gy-4"></div>
+  </section>
+
+  <footer>
+    <p>© 2025 CONNECTA. Todos os direitos reservados.</p>
+    <p>Email: contato@connecta.com | Instagram: @connecta_oficial</p>
+  </footer>
+
+  <script>
+    async function renderizarProjetos() {
+      const res = await fetch('http://localhost:3000/api/projetos');
+      const projetos = await res.json();
+      const container = document.getElementById('lista-projetos');
+      container.innerHTML = '';
+
+      projetos.forEach(proj => {
+        const div = document.createElement('div');
+        div.className = 'col-md-4';
+        div.innerHTML = `
+          <div class="card card-project h-100 p-3">
+            <h5>${proj.titulo}</h5>
+            <p>${proj.descricao}</p>
+            <p><strong>Vagas:</strong> ${proj.inscritos.length} / ${proj.limite}</p>
+            ${proj.arquivo ? `<a href="http://localhost:3000/uploads/${proj.arquivo}" target="_blank">Download do Arquivo</a><br/>` : ''}
+            <button class="btn btn-outline-primary mt-2" onclick="inscrever('${proj._id}')" ${proj.inscritos.length >= proj.limite ? 'disabled' : ''}>Inscrever-se</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function mostrarFormProjeto() {
+      document.getElementById('form-projeto-container').style.display = 'block';
+    }
+
+    async function inscrever(projetoId) {
+      const email = prompt("Digite seu e-mail para se inscrever:");
+      if (!email) return;
+
+      const res = await fetch(`http://localhost:3000/api/projetos/${projetoId}/inscrever`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await res.json();
+      if (!res.ok) alert(data.error || 'Erro ao se inscrever.');
+      else renderizarProjetos();
+    }
+
+    window.onload = renderizarProjetos;
+  </script>
+
+<script>
+  // Esconde o botão 'Perfil' se não estiver logado
+  const isLogado = localStorage.getItem('usuarioLogado');
+  const perfilLink = document.querySelector('a[href="perfil.html"]');
+  if (!isLogado && perfilLink) perfilLink.style.display = "none";
+</script>
+
+</body>
+</html>

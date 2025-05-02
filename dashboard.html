@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<style>
+body {
+  background: #f4f6f9;
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+  min-height: 100vh;
+}
+
+body::before {
+  content: 'CONNECTA';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15vw;
+  color: rgba(0, 0, 0, 0.05);
+  z-index: 0;
+  user-select: none;
+  pointer-events: none;
+}
+
+main, header, footer {
+  position: relative;
+  z-index: 1;
+}
+</style>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - CONNECTA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>CONNECTA - Painel do Usuário</h1>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="logout()">Sair</a></li>
+      </ul>
+    <a href="perfil.html" class="text-white ms-3">Perfil</a>
+    </nav>
+  </header>
+
+  <main class="section">
+    <section class="section">
+      <h2>Bem-vindo à sua área pessoal</h2>
+      <p>Aqui você encontrará informações sobre como utilizar a CONNECTA, visualizar e participar de projetos, além de se conectar com outras pessoas.</p>
+    </section>
+
+    <section class="section">
+      <h3>Sobre a Plataforma</h3>
+      <p>CONNECTA é uma plataforma colaborativa focada em integrar calouros, veteranos e professores através de projetos e eventos. Os usuários podem se cadastrar, criar projetos com vagas limitadas e se conectar com outros participantes.</p>
+    </section>
+
+    <section id="projetos" class="section">
+      <h3>Projetos Disponíveis</h3>
+<p><a href="projetos.html">Ver todos os projetos publicados</a></p>
+
+      <form id="form-projeto" onsubmit="criarProjeto(event)" enctype="multipart/form-data" class="bg-white p-4 rounded shadow-sm mb-4" style="max-width: 600px; margin: auto;">
+  <h4 class="mb-3 text-center">Postar Novo Projeto</h4>
+  <div class="mb-3">
+    <label class="form-label">Título</label>
+    <input type="text" name="titulo" class="form-control" placeholder="Título do projeto" required />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Descrição</label>
+    <textarea name="descricao" class="form-control" placeholder="Descrição do projeto" required></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Limite de Calouros</label>
+    <input type="number" name="limite" class="form-control" placeholder="Limite de calouros" min="1" required />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Arquivo (opcional)</label>
+    <input type="file" name="arquivo" class="form-control" />
+  </div>
+  <div class="d-grid">
+    <button type="submit" class="btn btn-primary">Publicar Projeto</button>
+  </div>
+</form>
+
+      
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 CONNECTA. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+<script>
+  // Esconde o botão 'Perfil' se não estiver logado
+  const isLogado = localStorage.getItem('usuarioLogado');
+  const perfilLink = document.querySelector('a[href="perfil.html"]');
+  if (!isLogado && perfilLink) perfilLink.style.display = "none";
+</script>
+
+</body>
+</html>
