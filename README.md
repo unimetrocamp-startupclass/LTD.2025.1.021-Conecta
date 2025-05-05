@@ -14,7 +14,7 @@ Entrar na faculdade é um grande passo, mas pode ser desafiador encontrar oportu
 
 Para resolver esse problema, criamos uma plataforma que conecta calouros a projetos desenvolvidos por veteranos. Aqui, os novos alunos poderão explorar diferentes iniciativas, encontrar algo que combine com seus interesses e se juntar a equipes para aprender e contribuir.
 
-Nosso sistema será construído com HTML, CSS e JavaScript no front-end, JAVA no back-end e PostgreSQL para armazenar os dados. Tudo pensado para ser intuitivo, acessível e seguro.
+Nosso sistema será construído com HTML, CSS e JavaScript no front-end, Python no back-end e PostgreSQL para armazenar os dados. Tudo pensado para ser intuitivo, acessível e seguro.
 
 Com essa plataforma, integrar-se a projetos acadêmicos será mais fácil, tornando a experiência universitária mais dinâmica e colaborativa desde o primeiro semestre!
 
