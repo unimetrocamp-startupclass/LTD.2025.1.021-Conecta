@@ -67,3 +67,49 @@ O desenvolvimento do projeto Conecta foi organizado em sprints semanais, seguind
 - Implementação do painel para veteranos gerenciarem inscrições.
 - Validação de dados e regras de negócio (número mínimo e máximo de calouros por projeto).
 - Testes de usabilidade e correções de bugs identificados.
+
+## Materiais e Metódos
+### Materiais:
+O desenvolvimento do projeto Conecta está sendo realizado com um conjunto de tecnologias modernas que visam garantir desempenho, escalabilidade e boa experiência do usuário. As ferramentas escolhidas estão divididas conforme as camadas do sistema:
+
+### Front-end
+- Flutter: Framework utilizado para a construção da interface gráfica da aplicação. Permite o desenvolvimento multiplataforma (web e mobile), oferecendo uma experiência moderna, responsiva e consistente.
+- Dart: Linguagem de programação utilizada pelo Flutter, responsável por definir a lógica da interface e o comportamento dos componentes visuais.
+
+### Back-end
+- Python: Utilizado na implementação da lógica de negócio e construção das APIs RESTful que interligam o front-end ao banco de dados. Frameworks como Flask ou Django estão sendo considerados para estruturar o servidor da aplicação.
+
+### Banco de Dados
+- PostgreSQL: Sistema gerenciador de banco de dados relacional, utilizado para armazenar dados dos usuários, projetos, inscrições e demais informações da plataforma.
+
+### Formato de Comunicação
+- JSON (JavaScript Object Notation): Padrão adotado para a troca de dados entre front-end e back-end, pela sua leveza, legibilidade e compatibilidade.
+
+Essas tecnologias foram selecionadas por sua robustez, comunidade ativa, ampla documentação e aderência a projetos escaláveis e modernos.
+
+### Métodos:
+A construção do sistema seguiu uma abordagem baseada nos princípios da engenharia de software, com foco em desenvolvimento iterativo, validação contínua e priorização das necessidades dos usuários:
+
+Levantamento de Requisitos
+Foram identificadas as principais dificuldades enfrentadas por calouros ao tentar ingressar em projetos acadêmicos. Com base nesse levantamento, foram definidos os requisitos funcionais e não funcionais da plataforma.
+
+### Modelagem do Sistema
+O sistema foi estruturado em módulos principais, incluindo:
+- Cadastro e autenticação de usuários (calouros e veteranos);
+- Catálogo de projetos com filtros por área de interesse;
+- Mecanismo de inscrição e gerenciamento de participantes nos projetos.
+
+### Desenvolvimento
+- O front-end está sendo desenvolvido com Flutter, visando uma interface amigável e responsiva.
+- O back-end, implementado em Python, expõe APIs RESTful e utiliza JSON como padrão de comunicação com o front-end.
+
+As principais funcionalidades previstas no backlog incluem:
+- Publicação e visualização de projetos;
+- Controle de períodos de abertura para projetos e inscrições;
+- Definição de número mínimo e máximo de participantes por projeto.
+
+### Testes e Validação
+Serão realizados testes funcionais para verificar o correto funcionamento das funcionalidades, testes de usabilidade com usuários finais e testes de integração entre front-end e back-end.
+
+### Deploy
+Após as fases de desenvolvimento e testes, a aplicação será disponibilizada em ambiente web, possibilitando o acesso por parte dos estudantes e veteranos da instituição.
