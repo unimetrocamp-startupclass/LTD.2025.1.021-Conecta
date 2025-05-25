@@ -113,3 +113,13 @@ Serão realizados testes funcionais para verificar o correto funcionamento das f
 
 ### Deploy
 Após as fases de desenvolvimento e testes, a aplicação será disponibilizada em ambiente web, possibilitando o acesso por parte dos estudantes e veteranos da instituição.
+
+## Resultados
+
+### Protótipos:
+
+
+![Início](https://github.com/user-attachments/assets/626b0576-21c2-4efd-979b-a58bef2e7627)
+
+Página de início, o usuário pode clicar em Login, Cadastro e Sobre.
+O sistema irá redirecionar para uma das páginas acima.
