@@ -118,8 +118,116 @@ Após as fases de desenvolvimento e testes, a aplicação será disponibilizada 
 
 ### Protótipos:
 
+#### ✅ Página Inicial
+![Página Inicial](https://github.com/user-attachments/assets/2a990405-1204-40f8-98c7-cbbdb344e5cb)
 
-![Início](https://github.com/user-attachments/assets/626b0576-21c2-4efd-979b-a58bef2e7627)
+> Função: Página de entrada do sistema — oferece opções de login, cadastro e sobre.
+📌 Ações do usuário:
+- Clicar em login
+- Clicar em cadastro
+- Clicar em sobre
+Reação do sistema:
+- Redirecionar para a página correspondente
 
-Página de início, o usuário pode clicar em Login, Cadastro e Sobre.
-O sistema irá redirecionar para uma das páginas acima.
+#### ✅ Página de Login
+![Página de Login](https://github.com/user-attachments/assets/c1c321b2-8db0-4716-acb2-c77219e8a5b3)
+
+> Função: Autenticação de usuários.
+📌 Ações do usuário:
+- Inserir e-mail
+- Inserir senha
+- Clicar em login
+Reação do sistema:
+- Verificar credenciais no banco de dados
+- Autenticar usuário
+
+#### ✅ Página de Cadastro
+![Página de Cadastro](https://github.com/user-attachments/assets/ec249796-4267-46b7-8203-905032348b45)
+
+> Função: Registro de novos usuários.
+📌 Ações do usuário:
+- Inserir nome
+- Inserir e-mail
+- Criar senha
+- Clicar em cadastrar
+Reação do sistema:
+- Armazenar informações no banco de dados
+
+#### ✅ Página Inicial Pós-Login
+![Página Inicial Pós-Login](https://github.com/user-attachments/assets/29e8a37c-c8fb-4900-af91-63bfc7a7e247)
+
+![Página Inicial Pós-Login 2](https://github.com/user-attachments/assets/87dd1621-8507-4b30-91c0-c4365957ea3e)
+
+> Função: Página de entrada após autenticação.
+📌 Ações do usuário:
+- Acessar projetos
+- Acessar perfil
+- Sair
+- Postar novo projeto
+Reação do sistema:
+- Exibir opções correspondentes
+
+#### ✅ Página de Projetos
+![Página de Projetos](https://github.com/user-attachments/assets/d9c160a8-3559-44ee-b4f1-0df5071be44f)
+
+> Função: Listagem de projetos publicados.
+📌 Ação do sistema:
+- Exibir projetos armazenados no banco de dados
+
+#### ✅ Página de Perfil
+![Página de Perfil](https://github.com/user-attachments/assets/0ab0ff9f-5a9e-4e90-8b49-51f3d5d8f4ed)
+
+> Função: Exibição de informações do usuário.
+📌 Ação do sistema:
+- Exibir informações do usuário
+
+#### ✅ Página Sobre
+![Página Sobre](https://github.com/user-attachments/assets/df483aa9-177c-4d65-87ce-b16fbbd2d9eb)
+
+> Função: Descrição sobre a equipe da Conecta.
+📌 Ação do sistema:
+- Exibir descrição sobre a equipe
+
+### Códigos das principais funcionalidades:
+
+#### ✅ 1. `main.js`
+> **Função**: Coração da lógica do sistema — controla o login, cadastro, logout e criação de projetos.
+
+![main.js](https://github.com/user-attachments/assets/929c254f-ba27-4710-8877-25da5b9d1dfd)
+
+📌 **Responsável por:**
+- Autenticação de login  
+- Registro de usuários
+Partes que tem no código mas não deu para mostrar no print:
+- Logout  
+- Integração com a classe `Projeto`
+
+### ✅ 2. `usuario.js`
+> **Função**: Define a **estrutura e comportamentos do usuário**.
+
+![usuario.js](https://github.com/user-attachments/assets/9a8c26d6-4d3e-4a13-810f-ced4499427b9)
+
+📌 **Responsável por:**
+- Criar e salvar novos usuários no `localStorage`  
+- Verificar existência de usuários  
+- Autenticar login
+
+### ✅ 3. `login.html`
+> **Função**: Página de **entrada no sistema**.
+
+![login.html](https://github.com/user-attachments/assets/ee51a6eb-b3be-4795-9f92-c63da16e0e43)
+
+📌 **Responsável por:**
+- Interface de login  
+- Gatilho para a função `handleLogin()`  
+- Estrutura de navegação entre login e cadastro
+
+### ✅ 4. `cadastro.html`
+> **Função**: Página de **registro de novos usuários**.
+
+![cadastro.html](https://github.com/user-attachments/assets/b5066a18-682b-494d-8c06-ace8112762cd)
+
+📌 **Responsável por:**
+- Interface de cadastro  
+- Gatilho para a função `handleCadastro()`  
+- Integração com a classe `Usuario`
