@@ -40,6 +40,7 @@
       <a href="dashboard.html" class="text-white me-3">Dashboard</a>
       <a href="projetos.html" class="text-white me-3">Projetos</a>
       <a href="perfil.html" class="text-white fw-bold">Perfil</a>
+      <a href="#" onclick="logout()" class="text-white ms-3">Sair</a>
     </nav>
   </header>
 
@@ -71,6 +72,10 @@
   <footer class="bg-light text-center py-3">
     <p>© 2025 CONNECTA. Todos os direitos reservados.</p>
   </footer>
+  
+<script src="js/usuario.js"></script>
+<script src="js/projeto.js"></script>
+<script src="js/main.js"></script>
 
 
 <script>
@@ -78,16 +83,29 @@
 
   function salvarPerfil(event) {
     event.preventDefault();
+    const email = localStorage.getItem("usuarioLogado");
+    if (!email) {
+      alert("Nenhum usuário logado.");
+      return;
+    }
+
     const dados = {};
     campos.forEach(id => {
       dados[id] = document.getElementById(id).value;
     });
-    localStorage.setItem("perfilUsuario", JSON.stringify(dados));
+
+    localStorage.setItem("perfil_" + email, JSON.stringify(dados));
     alert("Perfil salvo com sucesso!");
   }
 
   function carregarPerfil() {
-    const dados = JSON.parse(localStorage.getItem("perfilUsuario") || "{}");
+    const email = localStorage.getItem("usuarioLogado");
+    if (!email) {
+      alert("Nenhum usuário logado.");
+      return;
+    }
+
+    const dados = JSON.parse(localStorage.getItem("perfil_" + email) || "{}");
     campos.forEach(id => {
       if (dados[id]) document.getElementById(id).value = dados[id];
     });
@@ -95,6 +113,17 @@
 
   window.onload = carregarPerfil;
 </script>
+
+<script>
+  // Função para fazer logout
+    function logout() {
+    localStorage.removeItem("usuarioLogado");
+    window.location.href = "index.html"; // ou login.html
+  }
+
+  window.onload = carregarPerfil;
+</script>
+
 
 </body>
 </html>
