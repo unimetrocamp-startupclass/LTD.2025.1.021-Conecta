@@ -1,3 +1,4 @@
+// Função chamada quando o formulário de login é enviado
 function handleLogin(event) {
   event.preventDefault();
   const email = document.getElementById('login-email').value;
@@ -12,6 +13,7 @@ function handleLogin(event) {
   }
 }
 
+// Função chamada quando o formulário de cadastro é enviado
 function handleCadastro(event) {
   event.preventDefault();
   const nome = document.querySelector('#cadastro input[name="nome"]').value;
@@ -33,25 +35,32 @@ function handleCadastro(event) {
   alert('Cadastro realizado com sucesso!');
 }
 
+// Função para fazer logout do usuário
 function logout() {
   localStorage.removeItem("usuarioLogado");
   window.location.href = 'login.html';
 }
 
+// Função assíncrona para criar um projeto (usada no envio do formulário de criação)
 async function criarProjeto(event) {
   event.preventDefault();
-  const form = event.target;
+  console.log("Enviando projeto...");
+
+  const form = document.getElementById('form-projeto');
   const formData = new FormData(form);
 
   const sucesso = await Projeto.criar(formData);
+
   if (sucesso) {
+    alert("Projeto cadastrado com sucesso!");
     form.reset();
-    Projeto.renderizarTodos();
   } else {
-    alert('Erro ao criar projeto.');
+    alert("Erro ao cadastrar projeto.");
   }
 }
 
+
+// Quando a página carrega completamente...
 window.onload = () => {
   if (document.getElementById('lista-projetos')) {
     Projeto.renderizarTodos();
