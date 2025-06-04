@@ -2,13 +2,14 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projetos - CONECTA</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
 
+  <!-- Cabeçalho com navegação -->
   <header class="bg-primary text-white p-3">
     <div class="container d-flex justify-content-between">
       <h1 class="h4 m-0">CONECTA - Projetos</h1>
@@ -19,6 +20,7 @@
     </div>
   </header>
 
+  <!-- Conteúdo principal -->
   <main class="container my-5">
     <h2 class="text-center mb-4">Projetos Publicados</h2>
 
@@ -28,7 +30,7 @@
         <input type="text" id="filtroTitulo" class="form-control" placeholder="Buscar por título..." oninput="filtrarProjetos()">
       </div>
       <div class="col-md-3">
-        <input type="text" id="filtroAutor" class="form-control" placeholder="Filtrar por autor..." oninput="filtrarProjetos()">
+        <input type="text" id="filtroTutor" class="form-control" placeholder="Filtrar por tutor..." oninput="filtrarProjetos()">
       </div>
       <div class="col-md-3">
         <select id="filtroVagas" class="form-select" onchange="filtrarProjetos()">
@@ -48,38 +50,47 @@
       </div>
     </div>
 
-    <!-- Lista de projetos -->
+    <!-- Lista de projetos renderizada via JS -->
     <div id="lista-projetos" class="row gy-4"></div>
   </main>
 
+  <!-- Rodapé -->
   <footer class="bg-light text-center py-3">
     <p>© 2025 CONECTA. Todos os direitos reservados.</p>
   </footer>
 
-  <!-- Script principal embutido -->
+  <!-- Scripts -->
+  <script src="js/usuario.js"></script>
+  <script src="js/projeto.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Script principal embutido com renderização e filtro dos projetos -->
   <script>
     let projetosCache = [];
 
+    // Busca os projetos da API e simula a data de criação
     async function renderizarProjetos() {
-      const res = await fetch('http://localhost:3000/api/projetos');
-      let projetos = await res.json();
+      try {
+        const res = await fetch('http://localhost:3000/api/projetos');
+        let projetos = await res.json();
 
-      // Simular autor e data de criação
-      projetos = projetos.map((proj, i) => {
-        return {
+        projetos = projetos.map((proj, i) => ({
           ...proj,
-          autor: proj.inscritos.length % 2 === 0 ? 'Prof. Ana' : 'Prof. Bruno',
           criadoEm: new Date(Date.now() - i * 86400000) // 1 dia a menos por projeto
-        };
-      });
+        }));
 
-      projetosCache = projetos;
-      aplicarFiltros();
+        projetosCache = projetos;
+        aplicarFiltros();
+      } catch (err) {
+        console.error("Erro ao buscar projetos:", err);
+        alert("Erro ao carregar os projetos. Verifique sua conexão com o servidor.");
+      }
     }
 
+    // Filtra os projetos conforme os filtros selecionados e renderiza
     function aplicarFiltros() {
       const titulo = document.getElementById('filtroTitulo').value.toLowerCase();
-      const autor = document.getElementById('filtroAutor').value.toLowerCase();
+      const tutor = document.getElementById('filtroTutor').value.toLowerCase();
       const vagas = parseInt(document.getElementById('filtroVagas').value || "0");
       const dataFiltro = document.getElementById('filtroData').value;
 
@@ -90,7 +101,7 @@
       projetosCache
         .filter(proj =>
           proj.titulo.toLowerCase().includes(titulo) &&
-          proj.autor.toLowerCase().includes(autor) &&
+          proj.tutor.toLowerCase().includes(tutor) &&
           (proj.limite - proj.inscritos.length) >= vagas &&
           (dataFiltro === "" ||
             (dataFiltro === "hoje" && (agora - new Date(proj.criadoEm)) < 86400000) ||
@@ -100,17 +111,49 @@
         .forEach(proj => {
           const div = document.createElement('div');
           div.className = 'col-md-4';
+
+          // Cria o card de cada projeto com botão para se inscrever
           div.innerHTML = `
             <div class="card h-100 shadow-sm p-3">
               <h5 class="card-title">${proj.titulo}</h5>
               <p>${proj.descricao}</p>
-              <p><strong>Autor:</strong> ${proj.autor}</p>
+              <p><strong>Tutor:</strong> ${proj.tutor}</p>
               <p><strong>Data:</strong> ${new Date(proj.criadoEm).toLocaleDateString()}</p>
               <p><strong>Vagas:</strong> ${proj.inscritos.length} / ${proj.limite}</p>
               ${proj.arquivo ? `<a href="http://localhost:3000/uploads/${proj.arquivo}" target="_blank">Download do Arquivo</a><br/>` : ''}
-            </div>`;
+              <button class="btn btn-primary mt-2" onclick="inscreverProjeto('${proj._id}')">Inscrever-se</button>
+            </div>
+          `;
           container.appendChild(div);
         });
+    }
+
+    // Função que solicita e-mail do usuário para inscrever-se
+    async function inscreverProjeto(id) {
+      const email = prompt("Digite seu e-mail para se inscrever neste projeto:");
+      if (!email) return;
+
+      try {
+        const res = await fetch(`http://localhost:3000/api/projetos/${id}/inscrever`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert("Inscrição realizada com sucesso!");
+          renderizarProjetos(); // Recarrega para atualizar os inscritos
+        } else {
+          alert(data.mensagem || "Erro ao se inscrever.");
+        }
+      } catch (error) {
+        console.error("Erro ao se inscrever:", error);
+        alert("Erro ao se inscrever no projeto.");
+      }
     }
 
     function filtrarProjetos() {
@@ -119,6 +162,5 @@
 
     window.onload = renderizarProjetos;
   </script>
-
 </body>
 </html>
