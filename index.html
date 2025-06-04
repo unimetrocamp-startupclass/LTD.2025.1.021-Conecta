@@ -68,29 +68,6 @@
     <a href="cadastro.html" class="btn btn-light mt-4 px-4 py-2 fw-bold">Cadastre-se agora</a>
   </section>
 
-  <section class="container">
-    <h3 class="section-title">Projetos Disponíveis</h3>
-    <div id="form-projeto-container" style="display:none;">
-      <form id="form-projeto" class="bg-white p-4 rounded mb-5" enctype="multipart/form-data">
-        <h4 class="mb-3">Postar Novo Projeto</h4>
-        <div class="mb-3">
-          <input type="text" name="titulo" class="form-control" placeholder="Título do projeto" required>
-        </div>
-        <div class="mb-3">
-          <textarea name="descricao" class="form-control" placeholder="Descrição do projeto" required></textarea>
-        </div>
-        <div class="mb-3">
-          <input type="number" name="limite" class="form-control" placeholder="Limite de calouros" min="1" required>
-        </div>
-        <div class="mb-3">
-          <input type="file" name="arquivo" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary">Publicar Projeto</button>
-      </form>
-    </div>
-    <div id="lista-projetos" class="row gy-4"></div>
-  </section>
-
   <footer>
     <p>© 2025 CONECTA. Todos os direitos reservados.</p>
     <p>Email: contato@conecta.com | Instagram: @conecta_oficial</p>
@@ -100,58 +77,18 @@
   <script src="js/projeto.js"></script>
   <script src="js/main.js"></script>
 
-
-  <script>
-    async function renderizarProjetos() {
-      const res = await fetch('http://localhost:3000/api/projetos');
-      const projetos = await res.json();
-      const container = document.getElementById('lista-projetos');
-      container.innerHTML = '';
-
-      projetos.forEach(proj => {
-        const div = document.createElement('div');
-        div.className = 'col-md-4';
-        div.innerHTML = `
-          <div class="card card-project h-100 p-3">
-            <h5>${proj.titulo}</h5>
-            <p>${proj.descricao}</p>
-            <p><strong>Vagas:</strong> ${proj.inscritos.length} / ${proj.limite}</p>
-            ${proj.arquivo ? `<a href="http://localhost:3000/uploads/${proj.arquivo}" target="_blank">Download do Arquivo</a><br/>` : ''}
-            <button class="btn btn-outline-primary mt-2" onclick="inscrever('${proj._id}')" ${proj.inscritos.length >= proj.limite ? 'disabled' : ''}>Inscrever-se</button>
-          </div>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    function mostrarFormProjeto() {
-      document.getElementById('form-projeto-container').style.display = 'block';
-    }
-
-    async function inscrever(projetoId) {
-      const email = prompt("Digite seu e-mail para se inscrever:");
-      if (!email) return;
-
-      const res = await fetch(`http://localhost:3000/api/projetos/${projetoId}/inscrever`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
-      });
-
-      const data = await res.json();
-      if (!res.ok) alert(data.error || 'Erro ao se inscrever.');
-      else renderizarProjetos();
-    }
-
-    window.onload = renderizarProjetos;
-  </script>
-
 <script>
-  // Esconde o botão 'Perfil' se não estiver logado
+  // Chama o método da classe Projeto para renderizar todos os projetos
+  Projeto.renderizarTodos();
+
+  // Esconde o link "Perfil" se o usuário não estiver logado
   const isLogado = localStorage.getItem('usuarioLogado');
   const perfilLink = document.querySelector('a[href="perfil.html"]');
-  if (!isLogado && perfilLink) perfilLink.style.display = "none";
+  if (!isLogado && perfilLink) {
+    perfilLink.style.display = "none";
+  }
 </script>
+
 
 </body>
 </html>
