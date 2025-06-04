@@ -45,6 +45,7 @@
   </header>
 
   <main class="container my-5">
+    // Seção de informações do perfil
     <h2 class="text-center mb-4">Informações do Perfil</h2>
     <form class="bg-white p-4 rounded shadow-sm mx-auto" style="max-width: 600px;" onsubmit="salvarPerfil(event)">
       <div class="mb-3">
@@ -76,9 +77,11 @@
 <script src="js/usuario.js"></script>
 <script src="js/projeto.js"></script>
 <script src="js/main.js"></script>
-
+<script src="server.js"></script>
 
 <script>
+  // Função para salvar o perfil do usuário
+  // e carregar as informações do perfil ao abrir a página
   const campos = ["nome", "cpf", "curso", "professor"];
 
   function salvarPerfil(event) {
