@@ -1,4 +1,4 @@
-
+// Função para autenticar o usuário
 function handleLogin(event) {
   event.preventDefault();
   const email = document.getElementById('login-email').value;
@@ -13,6 +13,7 @@ function handleLogin(event) {
   }
 }
 
+// Função chamada quando o formulário de cadastro é enviado
 function handleCadastro(event) {
   event.preventDefault();
   const nome = document.querySelector('#cadastro input[name="nome"]').value;
@@ -32,11 +33,13 @@ function handleCadastro(event) {
   alert('Cadastro realizado com sucesso!');
 }
 
+// Função para fazer logout do usuário
 function logout() {
   localStorage.removeItem("usuarioLogado");
   window.location.href = 'login.html';
 }
 
+// Description: Função assíncrona para criar um projeto
 async function criarProjeto(event) {
   event.preventDefault();
   const form = event.target;
@@ -55,6 +58,7 @@ async function criarProjeto(event) {
   }
 }
 
+// Description: Função assíncrona para inscrever um usuário em um projeto
 async function inscrever(projetoId) {
   const email = prompt("Digite seu e-mail para se inscrever:");
   if (!email) return;
@@ -73,6 +77,7 @@ async function inscrever(projetoId) {
   }
 }
 
+// Description: Função assíncrona para renderizar a lista de projetos
 async function renderizarProjetos() {
   const res = await fetch('http://localhost:3000/api/projetos');
   const projetos = await res.json();
